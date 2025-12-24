@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Your Account</title>
+    <link rel="stylesheet" href="/stylesheet/style.css">
+</head>
+<body>
+    <div class="signin-container">
+        <div class="signin-form">
+            <div class="signin-box" id="find-account-box">
+                <h1>Find Your Account</h1>
+                <form id="find-account-form" action="/find-account" method="post">
+                    <div class="input-box">
+                        <input type="text" placeholder="Enter your username or email" required name="identifier">
+                    </div>
+                    <div class="input-box btn">
+                        <input type="submit" value="Find Account">
+                    </div>
+                </form>
+                <p style="text-align: center; margin-top: 15px; color: #666; font-size: 14px;">Forgot your password?</p>
+                <button type="button" onclick="window.location.href='/forgot-password'" style="background: #01b4ff; color: white; border: none; padding: 8px 16px; border-radius: 20px; cursor: pointer; margin-top: 10px;">Reset Password</button>
+            </div>
+        </div>
+        
+        <div class="signin-right">
+            <div class="satelite login signin-button" onclick="window.location.href='/login'">
+                <span>Sign in</span>
+            </div>
+            <div class="satelite forget" onclick="window.location.href='/'">
+                <span>Back to</span>
+                <span>Home</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

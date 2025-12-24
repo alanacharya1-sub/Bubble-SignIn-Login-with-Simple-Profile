@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= typeof user !== 'undefined' ? user.username + "'s Profile" : 'User Profile' %></title>
+    <link rel="stylesheet" href="/stylesheet/style.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .profile-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 40% 60% 30% 70% / 50% 30% 70% 50%; /* Bubble-like curved triangle shape */
+            padding: 30px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 
+                inset 20px 20px 20px #0000000d,
+                25px 35px 20px #0000000d,
+                25px 30px 30px #0000000d,
+                inset -20px -20px 25px #ffffffe6;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+        
+        .profile-container::before {
+            content: '';
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.3);
+            width: 15%;
+            height: 0;
+            padding-bottom: 15%;
+            left: 25%;
+            top: 25%;
+            border-radius: 50%;
+            opacity: 0.5;
+            transition: all ease .5s;
+        }
+        
+        .profile-container::after {
+            content: '';
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.5);
+            width: 10%;
+            height: 0;
+            padding-bottom: 10%;
+            left: 15%;
+            top: 15%;
+            border-radius: 50%;
+            opacity: 0.9;
+            transition: all ease .5s;
+        }
+        
+        .profile-container:hover {
+            border-radius: 50%; /* Transform to circle on hover */
+        }
+        
+        .profile-container:hover::before {
+            transform: translate(50%, 10%);
+        }
+        
+        .profile-container:hover::after {
+            transform: translate(50%, 10%);
+        }
+        
+        .profile-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .profile-pic.default {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 60px;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .profile-username {
+            font-size: 2em;
+            color: white;
+            margin: 10px 0;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .profile-email {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .profile-bio {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 20px;
+            border-radius: 30% 70% 20% 80% / 40% 40% 60% 60%; /* Bubble-like shape */
+            color: white;
+            margin: 20px 0;
+            text-align: left;
+            box-shadow: 
+                inset 2px 5px 10px #0000001a,
+                inset -2px -5px 10px #0000001a;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .profile-stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 25px 0;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .stat-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 25% 75% 40% 60% / 45% 35% 65% 55%; /* Bubble-like shape */
+            margin: 5px;
+            min-width: 120px;
+            box-shadow: 
+                inset 2px 5px 10px #0000001a,
+                inset -2px -5px 10px #0000001a;
+        }
+        
+        .stat-value {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .stat-label {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9em;
+        }
+        
+        .profile-actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .profile-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 30% 70% 20% 80% / 40% 40% 60% 60%; /* Bubble-like shape */
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 
+                inset 2px 5px 10px #0000001a,
+                inset -2px -5px 10px #0000001a;
+        }
+        
+        .logout-btn {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+        }
+        
+        .edit-btn {
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+            color: white;
+        }
+        
+        .profile-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 
+                inset 2px 5px 10px #0000001a,
+                inset -2px -5px 10px #0000001a,
+                0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .profile-btn:active {
+            transform: translateY(0);
+        }
+        
+        @media (max-width: 600px) {
+            .profile-container {
+                width: 95%;
+                padding: 20px;
+            }
+            
+            .profile-username {
+                font-size: 1.5em;
+            }
+            
+            .profile-stats {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .profile-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <div class="profile-header">
+            <% if (typeof user !== 'undefined' && user.profilePicture) { %>
+                <img src="<%= user.profilePicture %>" alt="Profile Picture" class="profile-pic">
+            <% } else { %>
+                <div class="profile-pic default">👤</div>
+            <% } %>
+            
+            <h1 class="profile-username"><%= typeof user !== 'undefined' ? user.username : 'User' %></h1>
+            <p class="profile-email"><%= typeof user !== 'undefined' ? user.email : '' %></p>
+        </div>
+        
+        <div class="profile-bio">
+            <h3>About Me</h3>
+            <p><%= typeof user !== 'undefined' && user.bio ? user.bio : 'No bio yet. Add a bio on your profile setup page.' %></p>
+        </div>
+        
+        <div class="profile-stats">
+            <div class="stat-box">
+                <div class="stat-value"><%= typeof user !== 'undefined' && user.age ? user.age : 'N/A' %></div>
+                <div class="stat-label">Age</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value">1</div>
+                <div class="stat-label">Posts</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value">50</div>
+                <div class="stat-label">Followers</div>
+            </div>
+        </div>
+        
+        <div class="profile-actions">
+            <a href="/profile-setup" class="profile-btn edit-btn">Edit Profile</a>
+            <a href="/logout" class="profile-btn logout-btn">Logout</a>
+        </div>
+    </div>
+</body>
+</html>

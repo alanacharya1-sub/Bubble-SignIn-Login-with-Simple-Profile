@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bubble Sign Up</title>
+    <link rel="stylesheet" href="/stylesheet/style.css">
+</head>
+<body>
+    <div class="signup-container">
+        <div class="signup-form">
+            <div class="signup-box">
+                <h1>Sign Up</h1>
+                <form id="signup-form" action="/create" method="post">
+                    <div class="input-box">
+                        <input type="text" placeholder="Full Name" required name="username">
+                    </div>
+                    <div class="input-box">
+                        <input type="email" placeholder="Email" required name="email">
+                    </div>
+                    <div class="input-box">
+                        <input type="password" placeholder="Password" required name="password">
+                    </div>
+                    <div class="input-box">
+                        <input type="number" placeholder="Age" required name="age">
+                    </div>
+                    <div class="input-box btn" id="sign-up-btn">
+                        <input type="submit" value="Sign Up">
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <div class="signup-right">
+            <div class="satelite login signin-button" onclick="window.location.href='/login'">
+                <span>Sign in</span>
+            </div>
+            <div class="satelite forget" onclick="window.location.href='/find-account'">
+                <span>Find</span>
+                <span>My Account</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

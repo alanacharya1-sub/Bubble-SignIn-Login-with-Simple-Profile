@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bubble Login</title>
+    <link rel="stylesheet" href="/stylesheet/style.css">
+</head>
+<body>
+    <div class="signin-container">
+        <div class="signin-form">
+            <div class="signin-box" id="login-box">
+                <h1>Sign In</h1>
+                <form id="login-form" action="/login" method="post">
+                    <div class="input-box">
+                        <input type="email" placeholder="Email" required name="email">
+                    </div>
+                    <div class="input-box">
+                        <input type="password" placeholder="Password" required name="password">
+                    </div>
+                    <div class="input-box btn">
+                        <input type="submit" value="Login">
+                    </div>
+                </form>
+            </div>
+            
+            <div class="signup-box" id="signup-box" style="display: none;">
+                <h1>Sign Up</h1>
+                <form id="signup-form" action="/create" method="post">
+                    <div class="input-box">
+                        <input type="text" placeholder="Full Name" required name="username">
+                    </div>
+                    <div class="input-box">
+                        <input type="email" placeholder="Email" required name="email">
+                    </div>
+                    <div class="input-box">
+                        <input type="password" placeholder="Password" required name="password">
+                    </div>
+                    <div class="input-box">
+                        <input type="number" placeholder="Age" required name="age">
+                    </div>
+                    <div class="input-box btn" >
+                        <input type="submit" value="Sign Up">
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <div class="signin-right">
+            <div class="satelite signup signup-button" onclick="window.location.href='/'">
+                <span>Sign up</span>
+            </div>
+            <div class="satelite forget" onclick="window.location.href='/forgot-password'">
+                <span>Forgot</span>
+                <span>Password</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
